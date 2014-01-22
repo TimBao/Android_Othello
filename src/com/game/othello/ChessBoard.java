@@ -93,6 +93,14 @@ public class ChessBoard implements DrawInterface {
         return y;
     }
 
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
     public int getSquareWidth() {
         return squareWidth;
     }
@@ -132,5 +140,15 @@ public class ChessBoard implements DrawInterface {
             }
         }
         return count;
+    }
+
+    public Chess getChessByLocation(ChessLocation location) {
+        for (Chess chess : chesses) {
+            if (chess.getLocation().getX() == location.getX()
+                    && chess.getLocation().getY() == location.getY()) {
+                return chess;
+            }
+        }
+        return null;
     }
 }

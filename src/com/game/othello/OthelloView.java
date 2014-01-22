@@ -83,13 +83,4 @@ public class OthelloView extends View implements ChessListener{
         invalidate();
     }
 
-    @Override
-    public void onNextDrop(ChessColor next) {
-        // TODO Auto-generated method stub
-        //if (robot != null && robot.getColor() == next) {
-            //robot drop next chess
-            //isGameOver()
-            //isTwiceDrop
-        //}
-    }
 }
