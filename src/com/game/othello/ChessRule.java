@@ -72,13 +72,13 @@ public class ChessRule {
         if ((location.getX() >= 0 && location.getY() < board.getColumns()) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
                 && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getY() - 1, j = location.getY() + 1; i >= 0 && j < board.getColumns(); --i, ++j) {
+            for (int i = location.getX() - 1, j = location.getY() + 1; i >= 0 && j < board.getColumns(); --i, ++j) {
                 Chess next = board.getChessByLocation(new ChessLocation(i, j));
                 if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
                     break;
                 }
                 if (chess.getColor() == next.getColor()) {
-                    for (int x = location.getY() - 1, y = location.getY() + 1; x >= i && y < j; --x, ++y) {
+                    for (int x = location.getX() , y = location.getY(); x > i && y < j; --x, ++y) {
                         board.getChessByLocation(new ChessLocation(x, y)).setColor(chess.getColor());
                     }
                     return;
@@ -92,13 +92,13 @@ public class ChessRule {
         if ((location.getX() < board.getRows() && location.getY() >= 0) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
                 && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getY() + 1, j = location.getY() - 1; i < board.getRows() && j >= 0; ++i, --j) {
+            for (int i = location.getX() + 1, j = location.getY() - 1; i < board.getRows() && j >= 0; ++i, --j) {
                 Chess next = board.getChessByLocation(new ChessLocation(i, j));
                 if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
                     break;
                 }
                 if (chess.getColor() == next.getColor()) {
-                    for (int x = location.getY() + 1, y = location.getY() - 1; x < i && y >= j; ++x, --y) {
+                    for (int x = location.getX(), y = location.getY(); x < i && y > j; ++x, --y) {
                         board.getChessByLocation(new ChessLocation(x, y)).setColor(chess.getColor());
                     }
                     return;
@@ -112,13 +112,13 @@ public class ChessRule {
         if ((location.getX() < board.getRows() && location.getY() < board.getColumns()) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
                 && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getY() + 1, j = location.getY() + 1; i < board.getRows() && j < board.getColumns(); ++i, ++j) {
+            for (int i = location.getX() + 1, j = location.getY() + 1; i < board.getRows() && j < board.getColumns(); ++i, ++j) {
                 Chess next = board.getChessByLocation(new ChessLocation(i, j));
                 if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
                     break;
                 }
                 if (chess.getColor() == next.getColor()) {
-                    for (int x = location.getY() + 1, y = location.getY() + 1; x < i && y < j; ++x, ++y) {
+                    for (int x = location.getX(), y = location.getY(); x < i && y < j; ++x, ++y) {
                         board.getChessByLocation(new ChessLocation(x, y)).setColor(chess.getColor());
                     }
                     return;
@@ -132,13 +132,13 @@ public class ChessRule {
         if ((location.getX() >= 0 && location.getY() >= 0) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
                 && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getY() - 1, j = location.getY() - 1; i >= 0 && j >= 0; --i, --j) {
+            for (int i = location.getX() - 1, j = location.getY() - 1; i >= 0 && j >= 0; --i, --j) {
                 Chess next = board.getChessByLocation(new ChessLocation(i, j));
                 if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
                     break;
                 }
                 if (chess.getColor() == chess.getColor()) {
-                    for (int x = location.getX() - 1, y= location.getY() - 1; x >= i && y >= j; --x, --y) {
+                    for (int x = location.getX(), y= location.getY(); x > i && y > j; --x, --y) {
                         board.getChessByLocation(new ChessLocation(x, y)).setColor(chess.getColor());
                     }
                     return;
@@ -240,9 +240,13 @@ public class ChessRule {
     private boolean isTwiceDrop(ChessColor prevColor) {
         for (Chess chess : board.getChesses()) {
             if (chess.getColor() != Chess.ChessColor.INVALID
-                    && chess.getColor() != prevColor 
-                        && canChessDrop(chess, chess.getColor())) {
-                return false;
+                    && chess.getColor() != prevColor ) {
+                for (Chess next : board.getChesses()) {
+                    if (next.getColor() == Chess.ChessColor.INVALID
+                            && canChessDrop(next, chess.getColor())) {
+                        return false;
+                    }
+                }
             }
         }
         return true;
@@ -253,6 +257,17 @@ public class ChessRule {
             return true;
         }
         if (board.getBlackChessCount() == 0 || board.getWhiteChessCount() == 0) {
+            return true;
+        }
+        int invalidCount = 0;
+        for (Chess chess : board.getChesses()) {
+            if (chess.getColor() == Chess.ChessColor.INVALID
+                    && !canChessDrop(chess, Chess.ChessColor.BLACK) 
+                    && !canChessDrop(chess, Chess.ChessColor.WHITE)) {
+                ++invalidCount;
+            }
+        }
+        if (invalidCount == board.getInvalidChessCount()) {
             return true;
         }
 
@@ -405,7 +420,7 @@ public class ChessRule {
         if ((location.getX() < board.getRows() && location.getY() < board.getColumns()) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
                 && (board.getChessByLocation(location).getColor() != color)) {
-            for (int i = location.getY() + 1, j = location.getY() + 1; i < board.getRows() && j < board.getColumns(); ++i, ++j) {
+            for (int i = location.getX() + 1, j = location.getY() + 1; i < board.getRows() && j < board.getColumns(); ++i, ++j) {
                 Chess chess = board.getChessByLocation(new ChessLocation(i, j));
                 if (chess == null || chess.getColor() == Chess.ChessColor.INVALID) {
                     break;
@@ -425,7 +440,7 @@ public class ChessRule {
         if ((location.getX() < board.getRows() && location.getY() >= 0) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
                 && (board.getChessByLocation(location).getColor() != color)) {
-            for (int i = location.getY() + 1, j = location.getY() - 1; i < board.getRows() && j >= 0; ++i, --j) {
+            for (int i = location.getX() + 1, j = location.getY() - 1; i < board.getRows() && j >= 0; ++i, --j) {
                 Chess chess = board.getChessByLocation(new ChessLocation(i, j));
                 if (chess == null || chess.getColor() == Chess.ChessColor.INVALID) {
                     break;
@@ -446,7 +461,7 @@ public class ChessRule {
         if ((location.getX() >= 0 && location.getY() < board.getColumns()) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
                 && (board.getChessByLocation(location).getColor() != color)) {
-            for (int i = location.getY() - 1, j = location.getY() + 1; i >= 0 && j < board.getColumns(); --i, ++j) {
+            for (int i = location.getX() - 1, j = location.getY() + 1; i >= 0 && j < board.getColumns(); --i, ++j) {
                 Chess chess = board.getChessByLocation(new ChessLocation(i, j));
                 if (chess == null || chess.getColor() == Chess.ChessColor.INVALID) {
                     break;
