@@ -1,20 +1,44 @@
 package com.game.othello;
 
+import com.game.othello.Chess.ChessColor;
+
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        OthelloView view = new OthelloView(this);
-        view.setBackgroundColor(Color.rgb(50, 100, 250));
-        setContentView(view);
+        setContentView(R.layout.activity_main);
+
+        OthelloView othello = (OthelloView)findViewById(R.id.othello);
+        final TextView text = (TextView)findViewById(R.id.current_color);
+        final TextView blackText = (TextView)findViewById(R.id.black_color);
+        final TextView whiteText = (TextView)findViewById(R.id.white_color);
+
+        final Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                super.handleMessage(msg);
+                switch (msg.what) {
+                case 0:
+                    text.setText((String)msg.obj);
+                    blackText.setText(String.valueOf(msg.arg1));
+                    whiteText.setText(String.valueOf(msg.arg2));
+                    break;
+                default:
+                    break;
+                }
+            }
+        };
+        othello.setHandler(handler);
     }
 
 

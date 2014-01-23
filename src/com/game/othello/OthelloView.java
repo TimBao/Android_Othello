@@ -2,12 +2,20 @@ package com.game.othello;
 
 import com.game.othello.Chess.ChessColor;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
+import android.os.Message;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 public class OthelloView extends View implements ChessListener{
 
@@ -19,9 +27,17 @@ public class OthelloView extends View implements ChessListener{
     private ChessBoard board;
     private ChessRule rule;
     private ChessRobot robot;
+    private Handler handler;
 
-    public OthelloView(Context context) {
-        super(context);
+    /**
+     * Constructs a OthelloView based on inflation from XML
+     * 
+     * @param context
+     * @param attrs
+     */
+    public OthelloView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        this.setBackgroundColor(Color.rgb(50, 100, 250));
         init();
     }
 
@@ -29,6 +45,10 @@ public class OthelloView extends View implements ChessListener{
         board = new ChessBoard();
 
         rule = new ChessRule(board, this);
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
     }
 
     @Override
@@ -68,14 +88,42 @@ public class OthelloView extends View implements ChessListener{
 
     @Override
     public void onGameOver(int white, int black) {
-        // TODO Auto-generated method stub
-        
+        AlertDialog.Builder builder = new Builder(this.getContext());
+        builder.setMessage("Game Over");
+        builder.setTitle("Game Over");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                
+            }
+
+         });
+         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialog, int which) {
+                 // TODO Auto-generated method stub
+                 
+             }
+         });
+         builder.create().show();
     }
 
     @Override
     public void onChessColor(ChessColor current) {
-        // TODO Auto-generated method stub
-        
+        Message msg = new Message();
+        msg.what = 0;
+        String color = "";
+        if (current == ChessColor.BLACK) {
+            color = "black";
+        } else {
+            color = "white";
+        }
+        msg.obj = color;
+        msg.arg1 = board.getBlackChessCount();
+        msg.arg2 = board.getWhiteChessCount();
+        handler.sendMessage(msg);
     }
 
     @Override

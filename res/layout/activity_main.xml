@@ -2,15 +2,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical" >
 
-    <com.game.othello.DrawView android:id="@+id/othello"
-                               android:layout_width="match_parent"
-                               android:layout_height="match_parent" />
+    <LinearLayout android:id="@+id/who"
+                  android:orientation="horizontal"
+                  android:layout_margin="1dp"
+                  android:layout_height="wrap_content"
+                  android:layout_width="match_parent" >
 
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Current color: "
+                  android:textSize="15sp"
+                  android:textColor="#000000" />
+
+        <TextView android:id="@+id/current_color"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Black"
+                  android:textSize="15sp"
+                  android:textColor="#000000" />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/score"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content"
+                  android:layout_width="match_parent" >
+
+        <LinearLayout 
+                      android:orientation="horizontal"
+                      android:layout_margin="1dp"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1" >
+
+	        <TextView android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_marginRight="2dp"
+	                  android:text="white: "
+	                  android:textSize="15sp"
+	                  android:textColor="#000000" />
+	
+	        <TextView android:id="@+id/white_color"
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:text="2"
+	                  android:textSize="15sp"
+	                  android:textColor="#000000" />
+        </LinearLayout>
+        <LinearLayout 
+                      android:orientation="horizontal"
+                      android:layout_margin="1dp"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:layout_weight="1"
+                      android:gravity="right" >
+
+	        <TextView
+	                  android:layout_width="wrap_content"
+	                  android:layout_height="wrap_content"
+	                  android:layout_marginRight="2dp"
+	                  android:text="black: "
+	                  android:textSize="15sp"
+	                  android:textColor="#000000" />
+	
+	        <TextView android:id="@+id/black_color"
+		              android:layout_width="match_parent"
+		              android:layout_height="wrap_content"
+		              android:text="2"
+		              android:textColor="#000000"
+		              android:textSize="15sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.game.othello.OthelloView
+        android:id="@+id/othello"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
