@@ -1,7 +1,5 @@
 package com.game.othello;
 
-import com.game.othello.Chess.ChessColor;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;

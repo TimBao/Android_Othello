@@ -251,6 +251,7 @@ public class ChessRule {
         }
         return true;
     }
+
     private boolean isGameOver() {
 
         if (board.getInvalidChessCount() == 0) {
@@ -453,7 +454,6 @@ public class ChessRule {
         }
         return canDrop;
     }
-
 
     private boolean canChessDropLeftDown(Chess dropChess, ChessColor color) {
         boolean canDrop = false;
