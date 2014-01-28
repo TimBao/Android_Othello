@@ -1,11 +1,14 @@
 package com.game.othello;
 
+import java.util.Vector;
+
 import com.game.othello.Chess.ChessColor;
 
 public class ChessRule {
     private ChessBoard board;
     private ChessListener listener;
     private Chess.ChessColor currentColor = Chess.ChessColor.BLACK;
+    private Vector reverseLocation = new Vector();
 
     public ChessRule(ChessBoard board, ChessListener listener) {
         this.board = board;
@@ -57,172 +60,10 @@ public class ChessRule {
     }
 
     private void reverseChess(Chess chess) {
-        reverseLeft(chess);
-        reverseRight(chess);
-        reverseUp(chess);
-        reverseDown(chess);
-        reverseLeftUp(chess);
-        reverseRightDown(chess);
-        reverseRightUp(chess);
-        reverseLeftDown(chess);
-    }
-
-    private void reverseLeftDown(Chess chess) {
-        ChessLocation location = new ChessLocation(chess.getLocation().getX() - 1, chess.getLocation().getY() + 1);
-        if ((location.getX() >= 0 && location.getY() < board.getColumns()) 
-                && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
-                && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getX() - 1, j = location.getY() + 1; i >= 0 && j < board.getColumns(); --i, ++j) {
-                Chess next = board.getChessByLocation(new ChessLocation(i, j));
-                if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
-                    break;
-                }
-                if (chess.getColor() == next.getColor()) {
-                    for (int x = location.getX() , y = location.getY(); x > i && y < j; --x, ++y) {
-                        board.getChessByLocation(new ChessLocation(x, y)).setColor(chess.getColor());
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private void reverseRightUp(Chess chess) {
-        ChessLocation location = new ChessLocation(chess.getLocation().getX() + 1, chess.getLocation().getY() - 1);
-        if ((location.getX() < board.getRows() && location.getY() >= 0) 
-                && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
-                && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getX() + 1, j = location.getY() - 1; i < board.getRows() && j >= 0; ++i, --j) {
-                Chess next = board.getChessByLocation(new ChessLocation(i, j));
-                if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
-                    break;
-                }
-                if (chess.getColor() == next.getColor()) {
-                    for (int x = location.getX(), y = location.getY(); x < i && y > j; ++x, --y) {
-                        board.getChessByLocation(new ChessLocation(x, y)).setColor(chess.getColor());
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private void reverseRightDown(Chess chess) {
-        ChessLocation location = new ChessLocation(chess.getLocation().getX() + 1, chess.getLocation().getY() + 1);
-        if ((location.getX() < board.getRows() && location.getY() < board.getColumns()) 
-                && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
-                && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getX() + 1, j = location.getY() + 1; i < board.getRows() && j < board.getColumns(); ++i, ++j) {
-                Chess next = board.getChessByLocation(new ChessLocation(i, j));
-                if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
-                    break;
-                }
-                if (chess.getColor() == next.getColor()) {
-                    for (int x = location.getX(), y = location.getY(); x < i && y < j; ++x, ++y) {
-                        board.getChessByLocation(new ChessLocation(x, y)).setColor(chess.getColor());
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private void reverseLeftUp(Chess chess) {
-        ChessLocation location = new ChessLocation(chess.getLocation().getX() - 1, chess.getLocation().getY() - 1);
-        if ((location.getX() >= 0 && location.getY() >= 0) 
-                && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
-                && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getX() - 1, j = location.getY() - 1; i >= 0 && j >= 0; --i, --j) {
-                Chess next = board.getChessByLocation(new ChessLocation(i, j));
-                if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
-                    break;
-                }
-                if (chess.getColor() == chess.getColor()) {
-                    for (int x = location.getX(), y= location.getY(); x > i && y > j; --x, --y) {
-                        board.getChessByLocation(new ChessLocation(x, y)).setColor(chess.getColor());
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private void reverseDown(Chess chess) {
-        ChessLocation location = new ChessLocation(chess.getLocation().getX(), chess.getLocation().getY() + 1);
-        if ((location.getY() < board.getColumns()) 
-                && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
-                && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getY() + 1; i < board.getColumns(); ++i) {
-                Chess next = board.getChessByLocation(new ChessLocation(location.getX(), i));
-                if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
-                    break;
-                }
-                if (chess.getColor() == next.getColor()) {
-                    for (int y = location.getY(); y < i; ++y) {
-                        board.getChessByLocation(new ChessLocation(chess.getLocation().getX(), y)).setColor(chess.getColor());
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private void reverseUp(Chess chess) {
-        ChessLocation location = new ChessLocation(chess.getLocation().getX(), chess.getLocation().getY() - 1);
-        if ((location.getY() >= 0) 
-                && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
-                && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getY() - 1; i >= 0; --i) {
-                Chess next = board.getChessByLocation(new ChessLocation(location.getX(), i));
-                if (next == null || chess.getColor() == Chess.ChessColor.INVALID) {
-                    break;
-                }
-                if (chess.getColor() == next.getColor()) {
-                    for (int y = location.getY(); y > i; --y) {
-                        board.getChessByLocation(new ChessLocation(chess.getLocation().getX(), y)).setColor(chess.getColor());
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private void reverseRight(Chess chess) {
-        ChessLocation location = new ChessLocation(chess.getLocation().getX() + 1, chess.getLocation().getY());
-        if ((location.getX() < board.getRows()) 
-                && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
-                && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getX() + 1; i < board.getRows(); ++i) {
-                Chess next = board.getChessByLocation(new ChessLocation(i, location.getY()));
-                if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
-                    break;
-                }
-                if (chess.getColor() == next.getColor()) {
-                    for (int x = location.getX(); x < i; ++x) {
-                        board.getChessByLocation(new ChessLocation(x, chess.getLocation().getY())).setColor(chess.getColor());
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    private void reverseLeft(Chess chess) {
-        ChessLocation location = new ChessLocation(chess.getLocation().getX() - 1, chess.getLocation().getY());
-        if ((location.getX() >= 0) 
-                && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
-                && (board.getChessByLocation(location).getColor() != chess.getColor())) {
-            for (int i = location.getX() - 1; i >= 0; --i) {
-                Chess next = board.getChessByLocation(new ChessLocation(i, location.getY()));
-                if (next == null || next.getColor() == Chess.ChessColor.INVALID) {
-                    break;
-                }
-                if (chess.getColor() == next.getColor()) {
-                    for (int x = location.getX(); x > i; --x) {
-                        board.getChessByLocation(new ChessLocation(x, chess.getLocation().getY())).setColor(chess.getColor());
-                    }
-                    return;
-                }
+        for(int i = 0; i < reverseLocation.size(); ++i) {
+            Chess reverseChess = getChess((ChessLocation)reverseLocation.get(i));
+            if (reverseChess != null) {
+                reverseChess.setColor(chess.getColor());
             }
         }
     }
@@ -305,18 +146,23 @@ public class ChessRule {
 
     public boolean canChessDrop(Chess dropChess, ChessColor color) {
         boolean canDrop = false;
-        if (canChessDropLeft(dropChess, color) || canChessDropRight(dropChess, color)
-                || canChessDropUp(dropChess, color) || canChessDropDown(dropChess, color)
-                || canChessDropLeftUp(dropChess, color) || canChessDropRightDown(dropChess, color)
-                || canChessDropRightUp(dropChess, color) || canChessDropLeftDown(dropChess, color)) {
+        reverseLocation.clear();
+        canChessDropLeft(dropChess, color);
+        canChessDropRight(dropChess, color);
+        canChessDropUp(dropChess, color);
+        canChessDropDown(dropChess, color);
+        canChessDropLeftUp(dropChess, color);
+        canChessDropRightDown(dropChess, color);
+        canChessDropRightUp(dropChess, color);
+        canChessDropLeftDown(dropChess, color);
+        if (reverseLocation.size() > 0) {
             canDrop = true;
         }
 
         return canDrop;
     }
 
-    private boolean canChessDropLeft(Chess dropChess, ChessColor color) {
-        boolean canDrop = false;
+    private void canChessDropLeft(Chess dropChess, ChessColor color) {
         ChessLocation location = new ChessLocation(dropChess.getLocation().getX() - 1, dropChess.getLocation().getY());
         if ((location.getX() >= 0) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
@@ -327,16 +173,16 @@ public class ChessRule {
                     break;
                 }
                 if (color == chess.getColor()) {
-                    canDrop = true;
-                    break;
+                    for (int x = location.getX(); x > i; --x) {
+                        reverseLocation.addElement(new ChessLocation(x, chess.getLocation().getY()));
+                    }
+                    return;
                 }
             }
         }
-        return canDrop;
     }
 
-    private boolean canChessDropRight(Chess dropChess, ChessColor color) {
-        boolean canDrop = false;
+    private void canChessDropRight(Chess dropChess, ChessColor color) {
         ChessLocation location = new ChessLocation(dropChess.getLocation().getX() + 1, dropChess.getLocation().getY());
         if ((location.getX() < board.getRows()) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
@@ -347,16 +193,16 @@ public class ChessRule {
                     break;
                 }
                 if (color == chess.getColor()) {
-                    canDrop = true;
-                    break;
+                    for (int x = location.getX(); x < i; ++x) {
+                        reverseLocation.addElement(new ChessLocation(x, chess.getLocation().getY()));
+                    }
+                    return;
                 }
             }
         }
-        return canDrop;
     }
 
-    private boolean canChessDropUp(Chess dropChess, ChessColor color) {
-        boolean canDrop = false;
+    private void canChessDropUp(Chess dropChess, ChessColor color) {
         ChessLocation location = new ChessLocation(dropChess.getLocation().getX(), dropChess.getLocation().getY() - 1);
         if ((location.getY() >= 0) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
@@ -367,16 +213,16 @@ public class ChessRule {
                     break;
                 }
                 if (color == chess.getColor()) {
-                    canDrop = true;
-                    break;
+                    for (int y = location.getY(); y > i; --y) {
+                        reverseLocation.addElement(new ChessLocation(chess.getLocation().getX(), y));
+                    }
+                    return;
                 }
             }
         }
-        return canDrop;
     }
 
-    private boolean canChessDropDown(Chess dropChess, ChessColor color) {
-        boolean canDrop = false;
+    private void canChessDropDown(Chess dropChess, ChessColor color) {
         ChessLocation location = new ChessLocation(dropChess.getLocation().getX(), dropChess.getLocation().getY() + 1);
         if ((location.getY() < board.getColumns()) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
@@ -387,16 +233,16 @@ public class ChessRule {
                     break;
                 }
                 if (color == chess.getColor()) {
-                    canDrop = true;
-                    break;
+                    for (int y = location.getY(); y < i; ++y) {
+                        reverseLocation.addElement(new ChessLocation(chess.getLocation().getX(), y));
+                    }
+                    return;
                 }
             }
         }
-        return canDrop;
     }
 
-    private boolean canChessDropLeftUp(Chess dropChess, ChessColor color) {
-        boolean canDrop = false;
+    private void canChessDropLeftUp(Chess dropChess, ChessColor color) {
         ChessLocation location = new ChessLocation(dropChess.getLocation().getX() - 1, dropChess.getLocation().getY() - 1);
         if ((location.getX() >= 0 && location.getY() >= 0) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
@@ -407,16 +253,16 @@ public class ChessRule {
                     break;
                 }
                 if (color == chess.getColor()) {
-                    canDrop = true;
-                    break;
+                    for (int x = location.getX(), y= location.getY(); x > i && y > j; --x, --y) {
+                        reverseLocation.addElement(new ChessLocation(x, y));
+                    }
+                    return;
                 }
             }
         }
-        return canDrop;
     }
 
-    private boolean canChessDropRightDown(Chess dropChess, ChessColor color) {
-        boolean canDrop = false;
+    private void canChessDropRightDown(Chess dropChess, ChessColor color) {
         ChessLocation location = new ChessLocation(dropChess.getLocation().getX() + 1, dropChess.getLocation().getY() + 1);
         if ((location.getX() < board.getRows() && location.getY() < board.getColumns()) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
@@ -427,16 +273,16 @@ public class ChessRule {
                     break;
                 }
                 if (color == chess.getColor()) {
-                    canDrop = true;
-                    break;
+                    for (int x = location.getX(), y = location.getY(); x < i && y < j; ++x, ++y) {
+                        reverseLocation.addElement(new ChessLocation(x, y));
+                    }
+                    return;
                 }
             }
         }
-        return canDrop;
     }
 
-    private boolean canChessDropRightUp(Chess dropChess, ChessColor color) {
-        boolean canDrop = false;
+    private void canChessDropRightUp(Chess dropChess, ChessColor color) {
         ChessLocation location = new ChessLocation(dropChess.getLocation().getX() + 1, dropChess.getLocation().getY() - 1);
         if ((location.getX() < board.getRows() && location.getY() >= 0) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
@@ -447,16 +293,16 @@ public class ChessRule {
                     break;
                 }
                 if (color == chess.getColor()) {
-                    canDrop = true;
-                    break;
+                    for (int x = location.getX(), y = location.getY(); x < i && y > j; ++x, --y) {
+                        reverseLocation.addElement(new ChessLocation(x, y));
+                    }
+                    return;
                 }
             }
         }
-        return canDrop;
     }
 
-    private boolean canChessDropLeftDown(Chess dropChess, ChessColor color) {
-        boolean canDrop = false;
+    private void canChessDropLeftDown(Chess dropChess, ChessColor color) {
         ChessLocation location = new ChessLocation(dropChess.getLocation().getX() - 1, dropChess.getLocation().getY() + 1);
         if ((location.getX() >= 0 && location.getY() < board.getColumns()) 
                 && (board.getChessByLocation(location).getColor() != Chess.ChessColor.INVALID)
@@ -467,11 +313,12 @@ public class ChessRule {
                     break;
                 }
                 if (color == chess.getColor()) {
-                    canDrop = true;
-                    break;
+                    for (int x = location.getX() , y = location.getY(); x > i && y < j; --x, ++y) {
+                        reverseLocation.addElement(new ChessLocation(x, y));
+                    }
+                    return;
                 }
             }
         }
-        return canDrop;
     }
 }
