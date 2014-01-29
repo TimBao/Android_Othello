@@ -61,20 +61,22 @@ public class ChessRule {
 
     public void dropChess(ChessLocation location, ChessColor color) {
         Chess chess = getChess(location);
-        chess.setColor(color);
-        reverseChess(chess);
-        if(isGameOver()) {
-            listener.onGameOver(board.getWhiteChessCount(), board.getBlackChessCount());
+        if (chess != null) {
+            chess.setColor(color);
+            reverseChess(chess);
+            if(isGameOver()) {
+                listener.onGameOver(board.getWhiteChessCount(), board.getBlackChessCount());
+            }
+    
+            if (isTwiceDrop(color)) {
+                currentColor = color;
+            } else {
+                getChessColor();
+            }
+    
+            listener.onDraw(); 
+            listener.onChessColor(currentColor);
         }
-
-        if (isTwiceDrop(color)) {
-            currentColor = color;
-        } else {
-            getChessColor();
-        }
-
-        listener.onDraw(); 
-        listener.onChessColor(currentColor);
     }
 
     private void reverseChess(Chess chess) {
