@@ -7,7 +7,7 @@ public class ChessRobotInterface {
         this.chessColor = chessColor;
     }
 
-    public ChessLocation getLocation(ChessBoard board) {
+    public ChessLocation getLocation(ChessRule rule) {
         return null;
     }
 

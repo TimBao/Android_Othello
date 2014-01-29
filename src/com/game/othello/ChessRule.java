@@ -59,6 +59,24 @@ public class ChessRule {
         }
     }
 
+    public void dropChess(ChessLocation location, ChessColor color) {
+        Chess chess = getChess(location);
+        chess.setColor(color);
+        reverseChess(chess);
+        if(isGameOver()) {
+            listener.onGameOver(board.getWhiteChessCount(), board.getBlackChessCount());
+        }
+
+        if (isTwiceDrop(color)) {
+            currentColor = color;
+        } else {
+            getChessColor();
+        }
+
+        listener.onDraw(); 
+        listener.onChessColor(currentColor);
+    }
+
     private void reverseChess(Chess chess) {
         for(int i = 0; i < reverseLocation.size(); ++i) {
             Chess reverseChess = getChess((ChessLocation)reverseLocation.get(i));
@@ -320,5 +338,13 @@ public class ChessRule {
                 }
             }
         }
+    }
+
+    public ChessBoard getBoard() {
+        return board;
+    }
+
+    public Chess.ChessColor getCurrentColor() {
+        return currentColor;
     }
 }

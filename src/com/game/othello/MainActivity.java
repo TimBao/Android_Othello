@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        OthelloView othello = (OthelloView)findViewById(R.id.othello);
+        final OthelloView othello = (OthelloView)findViewById(R.id.othello);
         final TextView text = (TextView)findViewById(R.id.current_color);
         final TextView blackText = (TextView)findViewById(R.id.black_color);
         final TextView whiteText = (TextView)findViewById(R.id.white_color);
@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
                     text.setText((String)msg.obj);
                     blackText.setText(String.valueOf(msg.arg1));
                     whiteText.setText(String.valueOf(msg.arg2));
+                    othello.robotDropChess();
                     break;
                 default:
                     break;

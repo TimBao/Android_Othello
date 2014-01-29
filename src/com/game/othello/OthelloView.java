@@ -27,7 +27,7 @@ public class OthelloView extends View implements ChessListener{
     private Paint paint = new Paint();
     private ChessBoard board;
     private ChessRule rule;
-    private ChessRobot robot;
+    private ChessRobotInterface robot;
     private Handler handler;
 
     /**
@@ -46,6 +46,9 @@ public class OthelloView extends View implements ChessListener{
         board = new ChessBoard();
 
         rule = new ChessRule(board, this);
+
+        //temp
+        robot = new ChessRobotEasy(ChessColor.WHITE);
     }
 
     public void setHandler(Handler handler) {
@@ -131,5 +134,11 @@ public class OthelloView extends View implements ChessListener{
     public void onDraw() {
         invalidate();
     }
- 
+
+    public void robotDropChess() {
+        if ((robot != null)
+                && (robot.getChessColor() == rule.getCurrentColor())) {
+            rule.dropChess(robot.getLocation(rule), robot.getChessColor());
+        }
+    }
 }
