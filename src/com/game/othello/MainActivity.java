@@ -38,6 +38,10 @@ public class MainActivity extends Activity {
             }
         };
         othello.setHandler(handler);
+        Intent intent = getIntent();
+        if (intent.getBooleanExtra("param", false)) {
+            othello.addRobot();
+        }
     }
 
 
@@ -58,5 +62,4 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
