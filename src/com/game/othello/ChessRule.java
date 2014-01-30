@@ -61,7 +61,7 @@ public class ChessRule {
 
     public void dropChess(ChessLocation location, ChessColor color) {
         Chess chess = getChess(location);
-        if (chess != null) {
+        if (chess != null && canChessDrop(chess, color)) {
             chess.setColor(color);
             reverseChess(chess);
             if(isGameOver()) {
@@ -348,5 +348,9 @@ public class ChessRule {
 
     public Chess.ChessColor getCurrentColor() {
         return currentColor;
+    }
+
+    public Vector getReverseLocation() {
+        return reverseLocation;
     }
 }

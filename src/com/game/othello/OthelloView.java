@@ -47,8 +47,10 @@ public class OthelloView extends View implements ChessListener{
 
         rule = new ChessRule(board, this);
 
-        //temp
-        robot = new ChessRobotEasy(ChessColor.WHITE);
+        //easy
+//        robot = new ChessRobotEasy(ChessColor.WHITE);
+        //normal
+        robot = new ChessRobotNormal(ChessColor.WHITE);
     }
 
     public void setHandler(Handler handler) {
