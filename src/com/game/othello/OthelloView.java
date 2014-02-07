@@ -42,14 +42,22 @@ public class OthelloView extends View implements ChessListener{
         init();
     }
 
-    public void addRobot() {
-        //easy
-//      robot = new ChessRobotEasy(ChessColor.WHITE);
-      //normal
-      robot = new ChessRobotNormal(ChessColor.WHITE);
+    public void addRobot(int level) {
+        switch(level) {
+        case 1:
+            robot = new ChessRobotEasy(ChessColor.WHITE);
+            break;
+        case 2:
+            robot = new ChessRobotNormal(ChessColor.WHITE);
+            break;
+        case 3:
+            break;
+        default:
+            break;
+        }
     }
 
-    private void init() {
+    public void init() {
         board = new ChessBoard();
 
         rule = new ChessRule(board, this);
@@ -97,14 +105,13 @@ public class OthelloView extends View implements ChessListener{
     @Override
     public void onGameOver(int white, int black) {
         AlertDialog.Builder builder = new Builder(this.getContext());
-        builder.setMessage("Game Over");
+        String message = "White: " + String.valueOf(white) + " Black: " + String.valueOf(black);
+        builder.setMessage(message);
         builder.setTitle("Game Over");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-                
             }
 
          });

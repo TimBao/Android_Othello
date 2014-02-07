@@ -23,7 +23,6 @@ public class StartupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("param", false);
                 intent.setClass(StartupActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -34,9 +33,8 @@ public class StartupActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();      
-                intent.putExtra("param", true);
-                intent.setClass(StartupActivity.this, MainActivity.class);
+                Intent intent = new Intent();
+                intent.setClass(StartupActivity.this, RobotLevelActivity.class);
                 startActivity(intent);
             }
             

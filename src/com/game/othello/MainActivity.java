@@ -39,8 +39,9 @@ public class MainActivity extends Activity {
         };
         othello.setHandler(handler);
         Intent intent = getIntent();
-        if (intent.getBooleanExtra("param", false)) {
-            othello.addRobot();
+        int level = 0;
+        if ((level = intent.getIntExtra("level", 0)) != 0) {
+            othello.addRobot(level);
         }
     }
 

@@ -29,13 +29,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.app.Activity" />
         </activity>
-
         <activity
             android:name="com.game.othello.MainActivity"
             android:label="@string/app_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.app.Activity" />
+        </activity>
+        <activity
+            android:name="com.game.othello.RobotLevelActivity"
+            android:label="@string/title_activity_robot_level" >
         </activity>
     </application>
 
