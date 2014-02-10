@@ -58,6 +58,7 @@ public class ChessBoard implements DrawInterface {
         for (int i = 0; i < chessSize; ++i) {
             newChesses.add(this.chesses.elementAt(i).copy());
         }
+        newBoard.chesses = newChesses;
 
         return newBoard;
     }

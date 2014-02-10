@@ -38,7 +38,7 @@ public class OthelloView extends View implements ChessListener{
      */
     public OthelloView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.setBackgroundColor(Color.rgb(50, 100, 250));
+        this.setBackgroundColor(Color.argb(100, 179, 113, 81));
         init();
     }
 

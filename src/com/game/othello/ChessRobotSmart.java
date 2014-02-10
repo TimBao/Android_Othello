@@ -9,7 +9,7 @@ import com.game.othello.Chess.ChessColor;
  */
 public class ChessRobotSmart extends ChessRobotInterface {
 
-    private static int maxDepth = 6;
+    private static int maxDepth = 7;
     private static int maxBoardValue = Integer.MAX_VALUE;
     private static int minBoardValue = -maxBoardValue;
 
@@ -212,7 +212,7 @@ public class ChessRobotSmart extends ChessRobotInterface {
             ChessLocation bestMove = new ChessLocation(-1, -1);
             for (ChessLocation l : possibleMoves) {
                 ChessRule nextRule = rule.copy();
-                nextRule.dropChess(location, currentColor);
+                nextRule.dropChess(l, currentColor);
                 boolean nextIsMaximizing = playerSkipsMove ? isMaximizing : !isMaximizing;
                 ChessColor nextColor = playerSkipsMove ? currentColor : getOppositeColor(currentColor);
                 int currentBoardValue = findBestLocation(nextRule, nextColor, nextIsMaximizing, currentDepth + 1, alpha, beta, location);

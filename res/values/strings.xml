@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Othello</string>
-    <string name="action_rule">Rule</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">黑白棋</string>
+    <string name="action_rule">规则</string>
     <string name="button_ok">OK</string>
     <string name="button_cancel">Cancel</string>
     <string name="help">棋盘共有8行8列共64格。开局时，棋盘正中央的4格先置放黑白相隔的4枚棋子（亦有求变化相邻放置）。通常黑子先行。双方轮流落子。只要落子和棋盘上任一枚己方的棋子在一条线上（横、直、斜线皆可）夹着对方棋子，就能将对方的这些棋子转变为我己方（翻面即可）。如果在任一位置落子都不能夹住对手的任一颗棋子，就要让对手下子。当双方皆不能下子时，游戏就结束，子多的一方胜。</string>
     <string name="rule">规则： </string>
-    <string name="title_activity_robot_level">RobotLevelActivity</string>
-    <string name="action_settings">Settings</string>
+    <string name="title_activity_robot_level">难度选择</string>
+    <string name="action_settings">设置</string>
 
 </resources>
