@@ -58,7 +58,7 @@ public class OthelloView extends View implements ChessListener{
     }
 
     public void init() {
-        board = new ChessBoard();
+        board = new ChessBoard(getContext());
 
         rule = new ChessRule(board, this);
     }

@@ -27,7 +27,7 @@ public class ChessRule {
                 if ((i == 3 && j == 4) || (i == 4 && j == 3)) {
                     color = ChessColor.BLACK;
                 }
-                board.addChess(new Chess(board, location, color, board.getChessRaduis()));
+                board.addChess(new Chess(board.getContext(), board, location, color, board.getChessRaduis()));
             }
         }
     }

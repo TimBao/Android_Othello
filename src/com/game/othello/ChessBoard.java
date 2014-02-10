@@ -2,11 +2,13 @@ package com.game.othello;
 
 import java.util.Vector;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
 public class ChessBoard implements DrawInterface {
 
+    private Context context;
     private int x;  //top left location of the board
     private int y;  //top left location of the board
     private int side; //side length of the board
@@ -16,7 +18,7 @@ public class ChessBoard implements DrawInterface {
     private Vector<Chess> chesses = new Vector();
     private int chessRaduis;
 
-    public ChessBoard() {
+    public ChessBoard(Context context) {
         this.x               = 0;
         this.y               = 0;
         this.side            = 0;
@@ -24,15 +26,17 @@ public class ChessBoard implements DrawInterface {
         this.rows            = 0;
         this.columns         = 0;
         this.chessRaduis     = 0;
+        this.context         = context;
     }
 
-    public ChessBoard(int x, int y, int side, int rows, int columns, int squareWidth) {
+    public ChessBoard(Context context, int x, int y, int side, int rows, int columns, int squareWidth) {
         this.x               = x;
         this.y               = y;
         this.side            = side;
         this.squareWidth     = squareWidth;
         this.rows            = rows;
         this.columns         = columns;
+        this.context         = context;
     }
 
     public void setAtrr(int x, int y, int side, int rows, int columns, int squareWidth, int radius) {
@@ -150,5 +154,9 @@ public class ChessBoard implements DrawInterface {
             }
         }
         return null;
+    }
+
+    public Context getContext() {
+        return context;
     }
 }
