@@ -1,6 +1,7 @@
 package com.game.othello;
 
 import java.util.Vector;
+import java.util.Map.Entry;
 
 import com.game.othello.Chess.ChessColor;
 
@@ -8,12 +9,16 @@ public class ChessRule {
     private ChessBoard board;
     private ChessListener listener;
     private Chess.ChessColor currentColor = Chess.ChessColor.BLACK;
-    private Vector reverseLocation = new Vector();
+    private Vector<ChessLocation> reverseLocation = new Vector();
 
     public ChessRule(ChessBoard board, ChessListener listener) {
         this.board = board;
         this.listener = listener;
         
+    }
+
+    public ChessRule copy() {
+        return new ChessRule(this.board.copy(), null);
     }
 
     public void setDefaultBoard() {
@@ -43,15 +48,18 @@ public class ChessRule {
                     chess.setColor(color);
                     reverseChess(chess);
                     if(isGameOver()) {
-                        listener.onGameOver(board.getWhiteChessCount(), board.getBlackChessCount());
+                        if(listener != null)
+                            listener.onGameOver(board.getWhiteChessCount(), board.getBlackChessCount());
                     }
 
                     if (isTwiceDrop(color)) {
                         currentColor = color;
                     }
 
-                    listener.onDraw(); 
-                    listener.onChessColor(currentColor);
+                    if(listener != null) {
+                        listener.onDraw(); 
+                        listener.onChessColor(currentColor);
+                    }
                 } else {
                     getChessColor();
                 }
@@ -65,7 +73,8 @@ public class ChessRule {
             chess.setColor(color);
             reverseChess(chess);
             if(isGameOver()) {
-                listener.onGameOver(board.getWhiteChessCount(), board.getBlackChessCount());
+                if(listener != null)
+                    listener.onGameOver(board.getWhiteChessCount(), board.getBlackChessCount());
             }
     
             if (isTwiceDrop(color)) {
@@ -73,9 +82,10 @@ public class ChessRule {
             } else {
                 getChessColor();
             }
-    
-            listener.onDraw(); 
-            listener.onChessColor(currentColor);
+            if(listener != null) {
+                listener.onDraw(); 
+                listener.onChessColor(currentColor);
+            }
         }
     }
 
@@ -342,6 +352,10 @@ public class ChessRule {
         }
     }
 
+    public void setBoard(ChessBoard board) {
+        this.board = board;
+    }
+
     public ChessBoard getBoard() {
         return board;
     }
@@ -350,7 +364,30 @@ public class ChessRule {
         return currentColor;
     }
 
-    public Vector getReverseLocation() {
+    public Vector getCanReverseLocation() {
         return reverseLocation;
+    }
+
+    public Vector<ChessLocation> getPossibleLocation(ChessColor color) {
+
+        Vector<ChessLocation> possibleMoves = new Vector();
+        for (Chess chess : board.getChesses()) {
+            if ((chess.getColor() == ChessColor.INVALID)
+                    && canChessDrop(chess, color)) {
+                possibleMoves.addElement(chess.getLocation());
+            }
+        }
+
+        return possibleMoves;
+    }
+
+    public int GetDiscsCount(ChessColor color) {
+        if (color == ChessColor.BLACK) {
+            return board.getBlackChessCount();
+        } else if (color == ChessColor.WHITE) {
+            return board.getWhiteChessCount();
+        } else {
+            return 0;
+        }
     }
 }

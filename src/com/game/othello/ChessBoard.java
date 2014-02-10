@@ -49,6 +49,18 @@ public class ChessBoard implements DrawInterface {
         this.chessRaduis     = radius;
     }
 
+    public ChessBoard copy() {
+        ChessBoard newBoard = new ChessBoard(this.context, this.x, this.y, this.side, this.rows, this.columns, this.squareWidth);
+        newBoard.chessRaduis = this.chessRaduis;
+        
+        Vector<Chess> newChesses = new Vector();
+        int chessSize = chesses.size();
+        for (int i = 0; i < chessSize; ++i) {
+            newChesses.add(this.chesses.elementAt(i).copy());
+        }
+
+        return newBoard;
+    }
 
     @Override
     public void onDraw(Canvas canvas, Paint paint) {

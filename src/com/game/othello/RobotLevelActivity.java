@@ -41,6 +41,18 @@ public class RobotLevelActivity extends Activity {
             }
             
         });
+
+        btnLevel3.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("level", 3);
+                intent.setClass(RobotLevelActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+            
+        });
     }
 
 }

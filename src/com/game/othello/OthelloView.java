@@ -51,6 +51,7 @@ public class OthelloView extends View implements ChessListener{
             robot = new ChessRobotNormal(ChessColor.WHITE);
             break;
         case 3:
+            robot = new ChessRobotSmart(ChessColor.WHITE);
             break;
         default:
             break;

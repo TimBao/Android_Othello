@@ -23,7 +23,7 @@ public class ChessRobotNormal extends ChessRobotInterface {
         for (Chess chess : board.getChesses()) {
             if ((chess.getColor() == ChessColor.INVALID)
                     && rule.canChessDrop(chess, getChessColor())) {
-                map.put(chess.getLocation(), rule.getReverseLocation().size());
+                map.put(chess.getLocation(), rule.getCanReverseLocation().size());
             }
         }
         int max = 0;

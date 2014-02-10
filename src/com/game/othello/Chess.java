@@ -43,6 +43,11 @@ public class Chess implements DrawInterface {
         this.context    = context;
     }
 
+    public Chess copy() {
+        Chess newChess = new Chess(this.context, this.board, this.location, this.color, this.radius, this.value);
+        return newChess;
+    }
+
     @Override
     public void onDraw(Canvas canvas, Paint paint) {
 
