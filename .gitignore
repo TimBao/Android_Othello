@@ -1,5 +1,6 @@
 # ignore files
 /bin/**
 /gen/**
+.DS_Store
 /res/.DS_Store
 /res/drawable/.DS_Store
