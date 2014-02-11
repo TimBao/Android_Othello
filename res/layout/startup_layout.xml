@@ -8,10 +8,10 @@
     <Button android:id="@+id/ptp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="人人对战"/>
+            android:text="@string/button_ptp"/>
 
     <Button android:id="@+id/ptr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="人机对战"/>
+            android:text="@string/button_ptr"/>
 </LinearLayout>
