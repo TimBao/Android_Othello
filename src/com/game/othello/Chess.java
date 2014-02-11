@@ -13,7 +13,8 @@ public class Chess implements DrawInterface {
     public enum ChessColor {
         INVALID,
         WHITE,
-        BLACK
+        BLACK,
+        HINT
     }
 
     private Context context;
@@ -70,6 +71,12 @@ public class Chess implements DrawInterface {
             Rect rect = new Rect(left, top, right, bottom);
             canvas.drawBitmap(bmp, null, rect, null);
 //            paint.setColor(Color.BLACK);
+        } else if (color == ChessColor.HINT) {
+            paint.setColor(Color.GREEN);
+            canvas.drawCircle(board.getX() + location.getX() * board.getSquareWidth() + board.getSquareWidth() / 2,
+                              board.getY() + location.getY() * board.getSquareWidth() + board.getSquareWidth() / 2,
+                              radius / 2,
+                              paint);
         }
 //        canvas.drawCircle(board.getX() + location.getX() * board.getSquareWidth() + board.getSquareWidth() / 2,
 //                          board.getY() + location.getY() * board.getSquareWidth() + board.getSquareWidth() / 2,

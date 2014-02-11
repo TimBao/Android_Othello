@@ -6,9 +6,12 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -23,12 +26,14 @@ public class OthelloView extends View implements ChessListener{
     private int screenWidth;
     private int screenHeight; 
     private static int squareNum = 8;
-    private static int borderWidth = 5;
+    private static int borderWidth = 2;
     private Paint paint = new Paint();
     private ChessBoard board;
     private ChessRule rule;
     private ChessRobotInterface robot;
     private Handler handler;
+
+    private Rect rect;
 
     /**
      * Constructs a OthelloView based on inflation from XML
@@ -70,7 +75,11 @@ public class OthelloView extends View implements ChessListener{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        paint.setColor(Color.YELLOW);
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.board);
+        
+        canvas.drawBitmap(bmp,null,rect,null);  
+        
+        paint.setColor(Color.BLACK);
         paint.setStrokeWidth(borderWidth);
         super.onDraw(canvas);
         board.onDraw(canvas, paint);
@@ -101,6 +110,7 @@ public class OthelloView extends View implements ChessListener{
         int y = (screenHeight - side) / 2;
         board.setAtrr(x, y, side, 8, 8, squareWidth, squareWidth/2-borderWidth);
         rule.setDefaultBoard();
+        rect = new Rect(x, y, x + squareWidth * 8, y + squareWidth * 8);
     }
 
     @Override

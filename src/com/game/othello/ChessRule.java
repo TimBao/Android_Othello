@@ -35,6 +35,7 @@ public class ChessRule {
                 board.addChess(new Chess(board.getContext(), board, location, color, board.getChessRaduis()));
             }
         }
+        setChessHintForHumanPlayer();
     }
 
     public void dropChess(int pX, int pY) {
@@ -55,7 +56,7 @@ public class ChessRule {
                     if (isTwiceDrop(color)) {
                         currentColor = color;
                     }
-
+                    setChessHintForHumanPlayer();
                     if(listener != null) {
                         listener.onDraw(); 
                         listener.onChessColor(currentColor);
@@ -82,10 +83,31 @@ public class ChessRule {
             } else {
                 getChessColor();
             }
+            setChessHintForHumanPlayer();
             if(listener != null) {
                 listener.onDraw(); 
                 listener.onChessColor(currentColor);
             }
+        }
+    }
+
+    private void setChessHintForHumanPlayer() {
+        for (Chess chess : board.getChesses()) {
+            if (chess.getColor() == ChessColor.HINT) {
+                chess.setColor(ChessColor.INVALID);;
+            }
+        }
+
+        if (currentColor == ChessColor.BLACK) {
+
+            Vector<ChessLocation> possibleLocation = getPossibleLocation(ChessColor.BLACK);
+            for(int i = 0; i < possibleLocation.size(); ++i) {
+                Chess possibleChess = getChess(possibleLocation.elementAt(i));
+                if (possibleChess != null) {
+                    possibleChess.setColor(ChessColor.HINT);
+                }
+            }
+            
         }
     }
 
@@ -167,7 +189,7 @@ public class ChessRule {
         for (Chess chess : board.getChesses()) {
             if (chess.getLocation().getX() == location.getX()
                     && chess.getLocation().getY() == location.getY() 
-                        && chess.getColor() != Chess.ChessColor.INVALID) {
+                        && (chess.getColor() == Chess.ChessColor.BLACK || chess.getColor() == Chess.ChessColor.WHITE)) {
                 return true;
             }
         }
