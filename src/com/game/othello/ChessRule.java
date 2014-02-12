@@ -80,6 +80,7 @@ public class ChessRule {
     }
 
     public void dropChess(ChessLocation location, ChessColor color) {
+        if (location == null) return;
         Chess chess = getChess(location);
         if (chess != null && canChessDrop(chess, color)) {
             chess.setColor(color);
