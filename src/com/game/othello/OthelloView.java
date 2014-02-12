@@ -57,7 +57,7 @@ public class OthelloView extends View implements ChessListener{
         default:
             break;
         }
-        rule.setAIColor(color);
+        rule.setRobot(robot);
     }
 
     public void init() {
@@ -68,6 +68,13 @@ public class OthelloView extends View implements ChessListener{
 
     public void setHandler(Handler handler) {
         this.handler = handler;
+    }
+
+    public void robotDropChess() {
+        if ((robot != null)
+                && (robot.getChessColor() == rule.getCurrentColor())) {
+            rule.dropChess(robot.getLocation(rule), robot.getChessColor());
+        }
     }
 
     @Override
@@ -113,7 +120,24 @@ public class OthelloView extends View implements ChessListener{
     @Override
     public void onGameOver(int white, int black) {
         AlertDialog.Builder builder = new Builder(this.getContext());
-        String message = "White: " + String.valueOf(white) + " Black: " + String.valueOf(black);
+        String message = "";
+        if (robot != null) {
+            if (robot.getChessColor() == ChessColor.BLACK) {
+                if (black > white) {
+                    message = "You lose!";
+                }
+            } else {
+                if (black > white) {
+                    message = "You win!";
+                }
+            }
+        } else {
+            if (black > white) {
+                message = "Black win!";
+            } else {
+                message = "White win!";
+            }
+        }
         builder.setMessage(message);
         builder.setTitle("Game Over");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -134,7 +158,7 @@ public class OthelloView extends View implements ChessListener{
     }
 
     @Override
-    public void onChessColor(ChessColor current) {
+    public void onChessDropped(ChessColor current) {
         Message msg = new Message();
         msg.what = 0;
         String color = "";
@@ -153,12 +177,5 @@ public class OthelloView extends View implements ChessListener{
     @Override
     public void onDraw() {
         invalidate();
-    }
-
-    public void robotDropChess() {
-        if ((robot != null)
-                && (robot.getChessColor() == rule.getCurrentColor())) {
-            rule.dropChess(robot.getLocation(rule), robot.getChessColor());
-        }
     }
 }

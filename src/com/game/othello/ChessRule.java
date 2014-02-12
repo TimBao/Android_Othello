@@ -1,15 +1,14 @@
 package com.game.othello;
 
 import java.util.Vector;
-import java.util.Map.Entry;
 
 import com.game.othello.Chess.ChessColor;
 
 public class ChessRule {
     private ChessBoard board;
+    private ChessRobotInterface robot;
     private ChessListener listener;
     private ChessColor currentColor = ChessColor.BLACK;
-    private ChessColor AIColor = ChessColor.INVALID;
     private Vector<ChessLocation> reverseLocation = new Vector();
 
     public ChessRule(ChessBoard board, ChessListener listener) {
@@ -20,6 +19,14 @@ public class ChessRule {
 
     public ChessRule copy() {
         return new ChessRule(this.board.copy(), null);
+    }
+
+    public ChessRobotInterface getRobot() {
+        return robot;
+    }
+
+    public void setRobot(ChessRobotInterface robot) {
+        this.robot = robot;
     }
 
     public void setDefaultBoard() {
@@ -37,8 +44,8 @@ public class ChessRule {
             }
         }
         setChessHintForHumanPlayer();
-        if (ChessColor.BLACK == AIColor) {
-            listener.onChessColor(currentColor);
+        if (robot != null && robot.getChessColor() == ChessColor.BLACK) {
+            listener.onChessDropped(currentColor);
         }
     }
 
@@ -63,7 +70,7 @@ public class ChessRule {
                     setChessHintForHumanPlayer();
                     if(listener != null) {
                         listener.onDraw(); 
-                        listener.onChessColor(currentColor);
+                        listener.onChessDropped(currentColor);
                     }
                 } else {
                     getChessColor();
@@ -81,7 +88,7 @@ public class ChessRule {
                 if(listener != null)
                     listener.onGameOver(board.getWhiteChessCount(), board.getBlackChessCount());
             }
-    
+
             if (isTwiceDrop(color)) {
                 currentColor = color;
             } else {
@@ -90,17 +97,9 @@ public class ChessRule {
             setChessHintForHumanPlayer();
             if(listener != null) {
                 listener.onDraw(); 
-                listener.onChessColor(currentColor);
+                listener.onChessDropped(currentColor);
             }
         }
-    }
-
-    public ChessColor getAIColor() {
-        return AIColor;
-    }
-
-    public void setAIColor(ChessColor aIColor) {
-        AIColor = aIColor;
     }
 
     private void setChessHintForHumanPlayer() {
@@ -109,17 +108,23 @@ public class ChessRule {
                 chess.setColor(ChessColor.INVALID);;
             }
         }
-
-        if (currentColor != getAIColor()) {
-
-            Vector<ChessLocation> possibleLocation = getPossibleLocation(currentColor);
+        Vector<ChessLocation> possibleLocation = getPossibleLocation(currentColor);
+        if (robot == null) {
             for(int i = 0; i < possibleLocation.size(); ++i) {
                 Chess possibleChess = getChess(possibleLocation.elementAt(i));
                 if (possibleChess != null) {
                     possibleChess.setColor(ChessColor.HINT);
                 }
             }
-            
+        } else {
+            if (currentColor != robot.getChessColor()) {
+                for(int i = 0; i < possibleLocation.size(); ++i) {
+                    Chess possibleChess = getChess(possibleLocation.elementAt(i));
+                    if (possibleChess != null) {
+                        possibleChess.setColor(ChessColor.HINT);
+                    }
+                }
+            }
         }
     }
 

@@ -13,19 +13,20 @@
     <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_margin="10dp">
+                  android:layout_margin="10dp"
+                  android:gravity="center|center_horizontal">
 
         <ImageButton android:id="@+id/btn_black_color"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:background="@null"
-                     android:src="@drawable/button_black_style" />
+                     android:src="@drawable/button_black_style"/>
 
         <ImageButton android:id="@+id/btn_white_color"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:background="@null"
-                     android:src="@drawable/button_white_style" />
+                     android:src="@drawable/button_white_style"/>
     </LinearLayout>
 
     <LinearLayout android:layout_width="wrap_content"
