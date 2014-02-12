@@ -399,11 +399,11 @@ public class ChessRule {
         return board;
     }
 
-    public Chess.ChessColor getCurrentColor() {
+    public ChessColor getCurrentColor() {
         return currentColor;
     }
 
-    public Vector getCanReverseLocation() {
+    public Vector<ChessLocation> getCanReverseLocation() {
         return reverseLocation;
     }
 
@@ -420,7 +420,7 @@ public class ChessRule {
         return possibleMoves;
     }
 
-    public int GetDiscsCount(ChessColor color) {
+    public int getChessCount(ChessColor color) {
         if (color == ChessColor.BLACK) {
             return board.getBlackChessCount();
         } else if (color == ChessColor.WHITE) {

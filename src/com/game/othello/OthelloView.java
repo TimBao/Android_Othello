@@ -123,20 +123,13 @@ public class OthelloView extends View implements ChessListener{
         String message = "";
         if (robot != null) {
             if (robot.getChessColor() == ChessColor.BLACK) {
-                if (black > white) {
-                    message = "You lose!";
-                }
+                message = (black > white) ? "You lose!" : "You win!";
+
             } else {
-                if (black > white) {
-                    message = "You win!";
-                }
+                message = (black > white) ? "You win!" : "You lose!";
             }
         } else {
-            if (black > white) {
-                message = "Black win!";
-            } else {
-                message = "White win!";
-            }
+            message = (black > white) ? "Black win!" : "White lose!";
         }
         builder.setMessage(message);
         builder.setTitle("Game Over");
@@ -161,13 +154,10 @@ public class OthelloView extends View implements ChessListener{
     public void onChessDropped(ChessColor current) {
         Message msg = new Message();
         msg.what = 0;
-        String color = "";
+        String color = (current == ChessColor.BLACK) ? "black" : "white";
         if (current == ChessColor.BLACK) {
-            color = "black";
             msg.what = 1;
-        } else {
-            color = "white";
-        }
+        } 
         msg.obj = color;
         msg.arg1 = board.getBlackChessCount();
         msg.arg2 = board.getWhiteChessCount();

@@ -2,6 +2,8 @@ package com.game.othello;
 
 import java.util.Vector;
 
+import com.game.othello.Chess.ChessColor;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -132,7 +134,8 @@ public class ChessBoard implements DrawInterface {
     public int getInvalidChessCount() {
         int count = 0;
         for (Chess chess : chesses) {
-            if (chess.getColor() == Chess.ChessColor.INVALID) {
+            if (chess.getColor() != ChessColor.INVALID 
+                    && chess.getColor() != ChessColor.HINT) {
                 ++count;
             }
         }
@@ -142,7 +145,7 @@ public class ChessBoard implements DrawInterface {
     public int getWhiteChessCount() {
         int count = 0;
         for (Chess chess : chesses) {
-            if (chess.getColor() == Chess.ChessColor.WHITE) {
+            if (chess.getColor() == ChessColor.WHITE) {
                 ++count;
             }
         }
@@ -152,7 +155,7 @@ public class ChessBoard implements DrawInterface {
     public int getBlackChessCount() {
         int count = 0;
         for (Chess chess : chesses) {
-            if (chess.getColor() == Chess.ChessColor.BLACK) {
+            if (chess.getColor() == ChessColor.BLACK) {
                 ++count;
             }
         }

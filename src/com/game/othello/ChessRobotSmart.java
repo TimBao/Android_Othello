@@ -33,7 +33,7 @@ public class ChessRobotSmart extends ChessRobotInterface {
         Vector<ChessLocation> oppositePlayerPossibleMoves = rule.getPossibleLocation(oppositeColor);
         Vector<ChessLocation> possibleMoves = rule.getPossibleLocation(color);
         if ((possibleMoves.size() == 0) && (oppositePlayerPossibleMoves.size() == 0)) {
-            int result = rule.GetDiscsCount(color) - rule.GetDiscsCount(oppositeColor);
+            int result = rule.getChessCount(color) - rule.getChessCount(oppositeColor);
             int addend = (int)Math.pow(8, 4) + (int)Math.pow(8, 3);
             if (result < 0) {
                 addend = -addend;
