@@ -158,7 +158,6 @@ public class OthelloView extends View implements ChessListener{
         if (current == ChessColor.BLACK) {
             msg.what = 1;
         } 
-        msg.obj = color;
         msg.arg1 = board.getBlackChessCount();
         msg.arg2 = board.getWhiteChessCount();
         handler.sendMessage(msg);
@@ -166,6 +165,8 @@ public class OthelloView extends View implements ChessListener{
 
     @Override
     public void onDraw() {
-        invalidate();
+        Message msg = new Message();
+        msg.obj = "draw";
+        handler.sendMessage(msg);
     }
 }

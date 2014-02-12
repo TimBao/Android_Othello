@@ -1,5 +1,8 @@
 package com.game.othello;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.game.othello.Chess.ChessColor;
 
 import android.os.Bundle;
@@ -30,11 +33,20 @@ public class MainActivity extends Activity {
             @Override
             public void handleMessage(Message msg){
                 super.handleMessage(msg);
-
-                blackCount.setText(String.valueOf(msg.arg1));
-                whiteCount.setText(String.valueOf(msg.arg2));
-                blackTurn.setVisibility(msg.what == 0 ? View.GONE : View.VISIBLE);
-                othello.robotDropChess();
+                if(msg.obj == null) {
+                    blackCount.setText(String.valueOf(msg.arg1));
+                    whiteCount.setText(String.valueOf(msg.arg2));
+                    blackTurn.setVisibility(msg.what == 0 ? View.GONE : View.VISIBLE);
+                    TimerTask task = new TimerTask(){  
+                        public void run(){ 
+                            othello.robotDropChess();
+                        }  
+                    };
+                    Timer timer = new Timer();
+                    timer.schedule(task, 300);
+                } else {
+                    othello.invalidate();
+                }
 
             }
         };
