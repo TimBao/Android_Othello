@@ -60,17 +60,14 @@ public class Chess implements DrawInterface {
         if (color == ChessColor.INVALID) {
             return;
         } else if (color == ChessColor.WHITE) {
-            //@TODO: how to show the picture do not stretch or set the picture size stable?
             Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chess);
             Rect rect = new Rect(left, top, right, bottom);
             canvas.drawBitmap(bmp, null, rect, null);
-//            paint.setColor(Color.WHITE);
 
         } else if (color == ChessColor.BLACK) {
             Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chess);
             Rect rect = new Rect(left, top, right, bottom);
             canvas.drawBitmap(bmp, null, rect, null);
-//            paint.setColor(Color.BLACK);
         } else if (color == ChessColor.HINT) {
             paint.setColor(Color.GREEN);
             canvas.drawCircle(board.getX() + location.getX() * board.getSquareWidth() + board.getSquareWidth() / 2,
@@ -78,10 +75,6 @@ public class Chess implements DrawInterface {
                               radius / 2,
                               paint);
         }
-//        canvas.drawCircle(board.getX() + location.getX() * board.getSquareWidth() + board.getSquareWidth() / 2,
-//                          board.getY() + location.getY() * board.getSquareWidth() + board.getSquareWidth() / 2,
-//                          radius,
-//                          paint);
     }
 
     public ChessColor getColor() {

@@ -15,7 +15,8 @@ public class ChessRobotEasy extends ChessRobotInterface {
     public ChessLocation getLocation(ChessRule rule) {
         ChessBoard board = rule.getBoard();
         for (Chess chess : board.getChesses()) {
-            if ((chess.getColor() == ChessColor.INVALID)
+            if ((chess.getColor() == ChessColor.INVALID
+                    || (chess.getColor() == ChessColor.HINT))
                     && rule.canChessDrop(chess, getChessColor())) {
                 return chess.getLocation();
             }
