@@ -37,13 +37,7 @@ public class MainActivity extends Activity {
                     blackCount.setText(String.valueOf(msg.arg1));
                     whiteCount.setText(String.valueOf(msg.arg2));
                     blackTurn.setVisibility(msg.what == 0 ? View.GONE : View.VISIBLE);
-                    TimerTask task = new TimerTask(){  
-                        public void run(){ 
-                            othello.robotDropChess();
-                        }  
-                    };
-                    Timer timer = new Timer();
-                    timer.schedule(task, 300);
+                    othello.robotDropChess();
                 } else {
                     othello.invalidate();
                 }
