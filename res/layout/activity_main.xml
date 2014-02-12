@@ -2,82 +2,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal|center">
 
-    <LinearLayout android:id="@+id/who"
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_margin="1dp"
-                  android:layout_height="wrap_content"
-                  android:layout_width="match_parent" >
+                  android:gravity="center|center_horizontal">
+        <Button android:id="@+id/black_count"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/black_chess"
+                android:text="2"
+                android:textColor="#ffffff"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Current color: "
-                  android:textSize="15sp"
-                  android:textColor="#000000" />
+        <FrameLayout android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/current_turn">
 
-        <TextView android:id="@+id/current_color"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Black"
-                  android:textSize="15sp"
-                  android:textColor="#000000" />
+            <ImageView android:id="@+id/current_turn_w"
+                       android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:background="@drawable/current_turn_w"/>
+            <ImageView android:id="@+id/current_turn_b"
+                       android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:background="@drawable/current_turn_b"/>
+
+        </FrameLayout>
+
+        <Button android:id="@+id/white_count"
+                   android:layout_width="40dp"
+                   android:layout_height="40dp"
+                   android:background="@drawable/white_chess"
+                   android:text="2"
+                   android:textColor="#000000"/>
     </LinearLayout>
-    <LinearLayout android:id="@+id/score"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content"
-                  android:layout_width="match_parent" >
 
-        <LinearLayout 
-                      android:orientation="horizontal"
-                      android:layout_margin="1dp"
-                      android:layout_height="wrap_content"
-                      android:layout_width="wrap_content"
-                      android:layout_weight="1" >
-
-	        <TextView android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_marginRight="2dp"
-	                  android:text="white: "
-	                  android:textSize="15sp"
-	                  android:textColor="#000000" />
-	
-	        <TextView android:id="@+id/white_color"
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:text="2"
-	                  android:textSize="15sp"
-	                  android:textColor="#000000" />
-        </LinearLayout>
-        <LinearLayout 
-                      android:orientation="horizontal"
-                      android:layout_margin="1dp"
-                      android:layout_height="wrap_content"
-                      android:layout_width="wrap_content"
-                      android:layout_weight="1"
-                      android:gravity="right" >
-
-	        <TextView
-	                  android:layout_width="wrap_content"
-	                  android:layout_height="wrap_content"
-	                  android:layout_marginRight="2dp"
-	                  android:text="black: "
-	                  android:textSize="15sp"
-	                  android:textColor="#000000" />
-	
-	        <TextView android:id="@+id/black_color"
-		              android:layout_width="match_parent"
-		              android:layout_height="wrap_content"
-		              android:text="2"
-		              android:textColor="#000000"
-		              android:textSize="15sp" />
-
-        </LinearLayout>
-    </LinearLayout>
 
     <com.game.othello.OthelloView
         android:id="@+id/othello"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
+    </com.game.othello.OthelloView>
 
 </LinearLayout>

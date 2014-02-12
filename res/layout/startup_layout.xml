@@ -8,10 +8,14 @@
     <Button android:id="@+id/ptp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_ptp"/>
+            android:background="@drawable/button_level_style"
+            android:text="@string/button_ptp"
+            android:textSize="30sp"/>
 
     <Button android:id="@+id/ptr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/button_ptr"/>
+            android:background="@drawable/button_level_style"
+            android:text="@string/button_ptr"
+            android:textSize="30sp"/>
 </LinearLayout>

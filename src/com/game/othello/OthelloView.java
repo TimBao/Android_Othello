@@ -15,11 +15,8 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 public class OthelloView extends View implements ChessListener{
 
@@ -43,24 +40,24 @@ public class OthelloView extends View implements ChessListener{
      */
     public OthelloView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.setBackgroundColor(Color.argb(100, 179, 113, 81));
         init();
     }
 
-    public void addRobot(int level) {
+    public void addRobot(int level, ChessColor color) {
         switch(level) {
         case 1:
-            robot = new ChessRobotEasy(ChessColor.WHITE);
+            robot = new ChessRobotEasy(color);
             break;
         case 2:
-            robot = new ChessRobotNormal(ChessColor.WHITE);
+            robot = new ChessRobotNormal(color);
             break;
         case 3:
-            robot = new ChessRobotSmart(ChessColor.WHITE);
+            robot = new ChessRobotSmart(color);
             break;
         default:
             break;
         }
+        rule.setAIColor(color);
     }
 
     public void init() {
@@ -75,13 +72,13 @@ public class OthelloView extends View implements ChessListener{
 
     @Override
     protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
         Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.board);
-        
         canvas.drawBitmap(bmp,null,rect,null);  
-        
+
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(borderWidth);
-        super.onDraw(canvas);
+
         board.onDraw(canvas, paint);
     }
 
@@ -143,6 +140,7 @@ public class OthelloView extends View implements ChessListener{
         String color = "";
         if (current == ChessColor.BLACK) {
             color = "black";
+            msg.what = 1;
         } else {
             color = "white";
         }

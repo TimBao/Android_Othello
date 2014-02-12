@@ -8,7 +8,8 @@ import com.game.othello.Chess.ChessColor;
 public class ChessRule {
     private ChessBoard board;
     private ChessListener listener;
-    private Chess.ChessColor currentColor = Chess.ChessColor.BLACK;
+    private ChessColor currentColor = ChessColor.BLACK;
+    private ChessColor AIColor = ChessColor.INVALID;
     private Vector<ChessLocation> reverseLocation = new Vector();
 
     public ChessRule(ChessBoard board, ChessListener listener) {
@@ -36,6 +37,9 @@ public class ChessRule {
             }
         }
         setChessHintForHumanPlayer();
+        if (ChessColor.BLACK == AIColor) {
+            listener.onChessColor(currentColor);
+        }
     }
 
     public void dropChess(int pX, int pY) {
@@ -91,6 +95,14 @@ public class ChessRule {
         }
     }
 
+    public ChessColor getAIColor() {
+        return AIColor;
+    }
+
+    public void setAIColor(ChessColor aIColor) {
+        AIColor = aIColor;
+    }
+
     private void setChessHintForHumanPlayer() {
         for (Chess chess : board.getChesses()) {
             if (chess.getColor() == ChessColor.HINT) {
@@ -98,9 +110,9 @@ public class ChessRule {
             }
         }
 
-        if (currentColor == ChessColor.BLACK) {
+        if (currentColor != getAIColor()) {
 
-            Vector<ChessLocation> possibleLocation = getPossibleLocation(ChessColor.BLACK);
+            Vector<ChessLocation> possibleLocation = getPossibleLocation(currentColor);
             for(int i = 0; i < possibleLocation.size(); ++i) {
                 Chess possibleChess = getChess(possibleLocation.elementAt(i));
                 if (possibleChess != null) {
