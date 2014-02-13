@@ -21,8 +21,11 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 public class OthelloView extends View implements ChessListener{
 
@@ -46,6 +49,7 @@ public class OthelloView extends View implements ChessListener{
      */
     public OthelloView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         init();
     }
 

@@ -15,7 +15,7 @@ import com.game.othello.Chess.ChessColor;
  */
 public class ChessRobotSmart extends ChessRobotInterface {
 
-    private static int maxDepth = 7;
+    private static int maxDepth = 15;
     private static int maxBoardValue = Integer.MAX_VALUE;
     private static int minBoardValue = -maxBoardValue;
 
