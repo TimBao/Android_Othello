@@ -3,19 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center|center_horizontal|center_vertical" >
+    android:background="@drawable/startup"
+    android:gravity="bottom">
 
-    <Button android:id="@+id/ptp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_level_style"
-            android:text="@string/button_ptp"
-            android:textSize="30sp"/>
+    <Button
+        android:id="@+id/ptp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_level_style"
+        android:text="@string/button_ptp"
+        android:textSize="30sp" />
 
     <Button android:id="@+id/ptr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_level_style"
             android:text="@string/button_ptr"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:layout_marginBottom="10dp"/>
 </LinearLayout>
