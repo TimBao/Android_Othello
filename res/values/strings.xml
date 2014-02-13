@@ -7,6 +7,7 @@
     <string name="rule">规则： </string>
     <string name="title_activity_robot_level">游戏设置</string>
     <string name="action_settings">菜单</string>
+    <string name="action_exit">确认退出吗？</string>
 
     <string name="button_ok">确定</string>
     <string name="button_cancel">取消</string>

@@ -13,8 +13,7 @@
     <LinearLayout android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_margin="10dp"
-                  android:gravity="center_horizontal|center_vertical|center">
+                  android:layout_gravity="center">
 
         <ImageButton android:id="@+id/btn_black_color"
                      android:layout_width="wrap_content"
