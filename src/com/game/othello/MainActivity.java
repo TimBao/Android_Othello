@@ -1,7 +1,10 @@
+/**
+ * Copyright (c) 2014, WanXiang Bao
+ * All rights reserved.
+ * Summary : 
+ * Author : WanXiang Bao
+ */
 package com.game.othello;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.game.othello.Chess.ChessColor;
 
@@ -15,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -33,7 +35,7 @@ public class MainActivity extends Activity {
             @Override
             public void handleMessage(Message msg){
                 super.handleMessage(msg);
-                if(msg.obj == null) {
+                if((String)msg.obj != "draw") {
                     blackCount.setText(String.valueOf(msg.arg1));
                     whiteCount.setText(String.valueOf(msg.arg2));
                     blackTurn.setVisibility(msg.what == 0 ? View.GONE : View.VISIBLE);

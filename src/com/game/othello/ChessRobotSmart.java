@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014, WanXiang Bao
+ * All rights reserved.
+ * Summary : 
+ * Author : WanXiang Bao
+ */
 package com.game.othello;
 
 import java.util.Vector;

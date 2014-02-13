@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014, WanXiang Bao
+ * All rights reserved.
+ * Summary : 
+ * Author : WanXiang Bao
+ */
 package com.game.othello;
 
 import java.util.Vector;
@@ -134,8 +140,8 @@ public class ChessBoard implements DrawInterface {
     public int getInvalidChessCount() {
         int count = 0;
         for (Chess chess : chesses) {
-            if (chess.getColor() != ChessColor.INVALID 
-                    && chess.getColor() != ChessColor.HINT) {
+            if (chess.getColor() == ChessColor.INVALID 
+                    || chess.getColor() == ChessColor.HINT) {
                 ++count;
             }
         }

@@ -1,6 +1,10 @@
+/**
+ * Copyright (c) 2014, WanXiang Bao
+ * All rights reserved.
+ * Summary : 
+ * Author : WanXiang Bao
+ */
 package com.game.othello;
-
-import com.game.othello.Chess.ChessColor;
 
 import android.os.Bundle;
 import android.app.Activity;

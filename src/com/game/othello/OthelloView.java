@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014, WanXiang Bao
+ * All rights reserved.
+ * Summary : 
+ * Author : WanXiang Bao
+ */
 package com.game.othello;
 
 import com.game.othello.Chess.ChessColor;
@@ -154,7 +160,6 @@ public class OthelloView extends View implements ChessListener{
     public void onChessDropped(ChessColor current) {
         Message msg = new Message();
         msg.what = 0;
-        String color = (current == ChessColor.BLACK) ? "black" : "white";
         if (current == ChessColor.BLACK) {
             msg.what = 1;
         } 
