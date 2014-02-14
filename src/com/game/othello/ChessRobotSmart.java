@@ -186,7 +186,7 @@ public class ChessRobotSmart extends ChessRobotInterface {
         int result = 0;
         ChessBoard board = rule.getBoard();
         for (Chess chess : board.getChesses()) {
-            if ((chess.getColor() == ChessColor.INVALID) || (chess.getColor() == ChessColor.HINT)
+            if ((chess.getColor() == ChessColor.INVALID)
                     && rule.canChessDrop(chess, getChessColor())) {
                 result += rule.getCanReverseLocation().size();
             }

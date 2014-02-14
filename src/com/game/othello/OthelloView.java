@@ -21,6 +21,7 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -71,6 +72,7 @@ public class OthelloView extends View implements ChessListener{
     }
 
     public void init() {
+
         board = new ChessBoard(getContext());
 
         rule = new ChessRule(board, this);
@@ -90,8 +92,7 @@ public class OthelloView extends View implements ChessListener{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.board);
-        canvas.drawBitmap(bmp,null,rect,null);  
+        canvas.drawBitmap(BitmapUtil.getBoardBitmap(this.getContext(), R.drawable.board),null,rect,null);
 
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(borderWidth);

@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import cn.waps.AppConnect;
+
 public class StartupActivity extends Activity {
 
     private Button btnPtp;
@@ -47,6 +49,8 @@ public class StartupActivity extends Activity {
             }
             
         });
+
+        AppConnect.getInstance("6757a538e6da409f6a5720cf6df8aa28", "default", this);
     }
 
     @Override
@@ -56,6 +60,7 @@ public class StartupActivity extends Activity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                AppConnect.getInstance(StartupActivity.this).close();
                 StartupActivity.this.finish();
             }
         })

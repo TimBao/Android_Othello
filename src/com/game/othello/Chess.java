@@ -7,8 +7,6 @@
 package com.game.othello;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -66,14 +64,12 @@ public class Chess implements DrawInterface {
         if (color == ChessColor.INVALID) {
             return;
         } else if (color == ChessColor.WHITE) {
-            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.white_chess);
             Rect rect = new Rect(left, top, right, bottom);
-            canvas.drawBitmap(bmp, null, rect, null);
+            canvas.drawBitmap(BitmapUtil.getChessBitmap(context, R.drawable.white_chess), null, rect, null);
 
         } else if (color == ChessColor.BLACK) {
-            Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.black_chess);
             Rect rect = new Rect(left, top, right, bottom);
-            canvas.drawBitmap(bmp, null, rect, null);
+            canvas.drawBitmap(BitmapUtil.getChessBitmap(context, R.drawable.black_chess), null, rect, null);
         } else if (color == ChessColor.HINT) {
             paint.setColor(Color.GREEN);
             canvas.drawCircle(board.getX() + location.getX() * board.getSquareWidth() + board.getSquareWidth() / 2,

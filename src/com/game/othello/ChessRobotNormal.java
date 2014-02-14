@@ -8,6 +8,7 @@ package com.game.othello;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 import java.util.Map.Entry;
 
 import com.game.othello.Chess.ChessColor;
@@ -27,7 +28,7 @@ public class ChessRobotNormal extends ChessRobotInterface {
 
         ChessBoard board = rule.getBoard();
         for (Chess chess : board.getChesses()) {
-            if (((chess.getColor() == ChessColor.INVALID) || (chess.getColor() == ChessColor.HINT))
+            if ((chess.getColor() == ChessColor.INVALID)
                     && rule.canChessDrop(chess, getChessColor())) {
                 map.put(chess.getLocation(), rule.getCanReverseLocation().size());
             }

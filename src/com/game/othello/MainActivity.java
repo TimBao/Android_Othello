@@ -6,6 +6,8 @@
  */
 package com.game.othello;
 
+import cn.waps.AppConnect;
+
 import com.game.othello.Chess.ChessColor;
 
 import android.os.Bundle;
@@ -13,14 +15,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
                 othello.addRobot(level, ChessColor.WHITE);
             }
         }
+
     }
 
 
@@ -77,6 +78,8 @@ public class MainActivity extends Activity {
             Intent intent = new Intent();               
             intent.setClass(this, GameRuleActivity.class);
             startActivity(intent);
+        } else if(item.getItemId() == R.id.action_ad) {
+            AppConnect.getInstance(this).showOffers(this);
         }
         return super.onOptionsItemSelected(item);
     }
