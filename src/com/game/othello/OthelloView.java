@@ -113,10 +113,15 @@ public class OthelloView extends View implements ChessListener{
     return true;
     }
 
+    public void restartGame() {
+        rule.setDefaultBoard();
+        this.invalidate();
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        screenWidth  = w;
+        screenWidth    = w;
         screenHeight = h;
         int sideLength = Math.min(screenWidth, screenHeight);
         int squareWidth = (sideLength - 2 * borderWidth) / squareNum;
@@ -143,19 +148,18 @@ public class OthelloView extends View implements ChessListener{
             message = (black > white) ? "Black win!" : "White lose!";
         }
         builder.setMessage(message);
-        builder.setTitle("Game Over");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setTitle("游戏结束");
+        builder.setPositiveButton("再来一局", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                restartGame();
             }
 
          });
-         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+         builder.setNegativeButton("结束", new DialogInterface.OnClickListener() {
              @Override
              public void onClick(DialogInterface dialog, int which) {
-                 // TODO Auto-generated method stub
-                 
              }
          });
          builder.create().show();
