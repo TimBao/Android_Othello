@@ -20,6 +20,7 @@ public class StartupActivity extends Activity {
 
     private Button btnPtp;
     private Button btnPtr;
+    private static String APPPID = "default";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,52 @@ public class StartupActivity extends Activity {
             
         });
 
-        AppConnect.getInstance("6757a538e6da409f6a5720cf6df8aa28", "default", this);
+        String appPId = "default";
+        if (APPPID == "") {
+            appPId = "default";
+        } else if (APPPID == "google") {
+            appPId = "google";
+        } else if (APPPID == "91") {
+            appPId = "91";
+        } else if (APPPID == "hiapk") {
+            appPId = "hiapk";
+        } else if (APPPID == "goapk") {
+            appPId = "goapk";
+        } else if (APPPID == "appChina") {
+            appPId = "appChina";
+        } else if (APPPID == "feiliu") {
+            appPId = "feiliu";
+        } else if (APPPID == "huawei") {
+            appPId = "huawei";
+        } else if (APPPID == "QQ") {
+            appPId = "QQ";
+        } else if (APPPID == "3G") {
+            appPId = "3G";
+        } else if (APPPID == "360") {
+            appPId = "360";
+        } else if (APPPID == "baidu") {
+            appPId = "baidu";
+        } else if (APPPID == "sohu") {
+            appPId = "sohu";
+        } else if (APPPID == "UC") {
+            appPId = "UC";
+        } else if (APPPID == "dangle") {
+            appPId = "dangle";
+        } else if (APPPID == "samsung") {
+            appPId = "samsung";
+        } else if (APPPID == "xiaomi") {
+            appPId = "xiaomi";
+        } else if (APPPID == "nearme") {
+            appPId = "nearme";
+        } else if (APPPID == "partner") {
+            appPId = "";
+        }
+
+        if (appPId != null) {
+            AppConnect.getInstance("6757a538e6da409f6a5720cf6df8aa28", appPId, this);
+        } else {
+            AppConnect.getInstance(this);
+        }
     }
 
     @Override
