@@ -10,30 +10,31 @@
                   android:orientation="horizontal"
                   android:gravity="center|center_horizontal">
         <Button android:id="@+id/black_count"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@drawable/black_chess"
                 android:text="2"
                 android:textColor="#ffffff"/>
 
         <FrameLayout android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:id="@+id/current_turn">
+                     android:id="@+id/current_turn"
+                     android:layout_margin="20dp">
 
             <ImageView android:id="@+id/current_turn_w"
-                       android:layout_width="40dp"
-                       android:layout_height="40dp"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
                        android:background="@drawable/current_turn_w"/>
             <ImageView android:id="@+id/current_turn_b"
-                       android:layout_width="40dp"
-                       android:layout_height="40dp"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
                        android:background="@drawable/current_turn_b"/>
 
         </FrameLayout>
 
         <Button android:id="@+id/white_count"
-                   android:layout_width="40dp"
-                   android:layout_height="40dp"
+                   android:layout_width="50dp"
+                   android:layout_height="50dp"
                    android:background="@drawable/white_chess"
                    android:text="2"
                    android:textColor="#000000"/>
